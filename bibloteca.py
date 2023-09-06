@@ -11,7 +11,11 @@ libros.append(l.libro3)
 
 
 def ejemplares_prestados():
-
+    for libro in libros:
+        if libro['cant_ej_pr'] > 0:
+            print(f"Nombre: {libro['titulo']}\nPrestados: {libro['cant_ej_pr']}\n")
+        else:
+            print(f"No hay ejemplares prestados del libro {libro['titulo']}")
     return None
 
 def registrar_nuevo_libro():
@@ -27,32 +31,48 @@ def prestar_ejemplar_libro():
     codigo_ingresado=input("Ingrese el código del libro")
     for libro in libros:
         if libro['cod'] == codigo_ingresado:
-
             print(f"Autor:{libro['autor']}\nNombre:{libro['titulo']}\nDisponibles:{libro['cant_ej_ad']}")
-
             if libro['cant_ej_ad'] > 0:
-                retirar=input("Desea retirar un libro? S - N")
-                
-                # VALIDAR LA RESPUESTA S - N
-        
-                if retirar.upper() == "S":
-                    libro['cant_ej_ad']-=1
-                    print(f"Disponibles:{libro['cant_ej_ad']}")
-                    print("Libro prestado con exito")
-                    return None
-                else:
-                    print("Libro no prestado")
-                    return None
+                while True:
+                    retirar=input("Desea retirar un libro? S - N \n")
+                    if retirar.upper() == "S":
+                        libro['cant_ej_ad']-=1
+                        libro['cant_ej_pr']+= 1
+                        print(f"Disponibles:{libro['cant_ej_ad']}")
+                        print("Libro prestado con exito")
+                        return None
+                    elif retirar.upper() == "N":
+                        print("Libro no prestado")
+                        return None
+                    else:
+                        print("Ingrese (s o S) para retirar el libro o (n o N) para no hacerlo \n")
             else:
                 print("No hay ejemplares para prestar")
                 return None
         elif libro['cod']!= codigo_ingresado and libro == libros[-1]:
             print("Libro no encontrado")
-            
     return None
 
 def devolver_ejemplar_libro():
-    #completar
+    codigo_ingresado=input("Ingrese el código del libro")
+    for libro in libros:
+        if libro['cod'] == codigo_ingresado and libro['cant_ej_pr'] > 0:
+          print(f"Hay {libro['cant_ej_pr']} prestados")
+          while True:
+                devolver=input("Desea devolver un libro? S - N \n").upper()
+                if devolver == "S":
+                  libro['cant_ej_pr'] -= 1
+                  libro['cant_ej_ad'] += 1
+                  print("Libro devuelto con exito")
+                  return None
+                elif devolver == "N":
+                  print("No se devolvio el libro")
+                  return None
+                else:
+                    print("Ingrese (s o S) para devolver el libro o (n o N) para no hacerlo \n")
+        else:
+            print("No hay libros prestados")
+            return None
     return None
 
 def nuevo_libro():
