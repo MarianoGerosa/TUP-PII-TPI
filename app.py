@@ -1,7 +1,9 @@
+import bibloteca as biblio
 # Trabajo Práctico I - Programación II
 
 
 import os
+
 
 #probando git
 
@@ -9,6 +11,7 @@ print("Bienvenido!")
 respuesta = ''
 
 def menu():
+    os.system ("cls")
     print("1 - Gestionar Prestamo")
     print("2 - Gestionar Devolucion")
     print("3 - Registrar nuevo libro")
@@ -22,8 +25,10 @@ while respuesta != "salir":
     os.system ("cls") #Limpiar pantalla
     if opt.isnumeric():
         if int(opt) == 1:
-            #completar
-            print()
+            
+
+            biblio.prestar_ejemplar_libro()
+            
         elif int(opt) == 2:
             #completar
             print()
