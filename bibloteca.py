@@ -24,19 +24,21 @@ def ejemplares_prestados():
 def eliminar_ejemplar_libro():
     codigo_ingresado=input("Ingrese el código del libro: ")
     for libro in libros:
-        if libro['cod'] == codigo_ingresado and libro['cant_ej_ad'] > 0:
-            print(f"Autor:{libro['autor']}\nNombre:{libro['titulo']}\nDisponibles:{libro['cant_ej_ad']}")
-            eli=int(input("Ingrese cuantos ejemplares quiere eliminar: "))
-            if eli > libro['cant_ej_ad']:
-                print("No se puede eliminar mas ejemplares de los que hay, intente nuevamente")
-                return None
+        if libro['cod'] == codigo_ingresado: 
+            if libro['cant_ej_ad'] > 0:
+                print(f"Autor:{libro['autor']}\nNombre:{libro['titulo']}\nDisponibles:{libro['cant_ej_ad']}")
+                eli=int(input("Ingrese cuantos ejemplares quiere eliminar: "))
+                if eli > libro['cant_ej_ad']:
+                    print("No se puede eliminar mas ejemplares de los que hay, intente nuevamente")
+                    return None
+                else:
+                    libro['cant_ej_ad'] -= eli
+                    print("Se eliminó el ejemplar del libro correctamente")
+                    return None
             else:
-                libro['cant_ej_ad'] -= eli
-                print("Se elimino el ejemplar del libro correctamente")
+                print("No hay ejemplares disponibles")
                 return None
-        else:
-            print("Libro no encontrado o no hay ejemplares disponibles")
-            return None
+    print("No se encontro el libro en la lista")
     return None
 
 def prestar_ejemplar_libro():
@@ -105,5 +107,7 @@ def nuevo_libro():
     cant_ej_adquiridos=int(input("Ingrese la cantidad de ejemplares que desea ingresar al sistema: "))
 
     libros[-1]={'cod': codigo, 'cant_ej_ad': cant_ej_adquiridos, 'cant_ej_pr': 0, "titulo": nombre_ejemplar, "autor": autor_ingresar}
-    print(f"Resumen: {libros[-1]}")
+    dicc=libros[-1]
+    print(f"RESUMEN\nAutor:{dicc['autor']}\nNombre:{dicc['titulo']}\nDisponibles:{dicc['cant_ej_ad']}")
+    
     return None
