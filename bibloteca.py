@@ -1,4 +1,5 @@
 import libro as l
+import cod_generator as cg
 
 
 # Crear una lista vacía para almacenar los libros
@@ -90,5 +91,18 @@ def devolver_ejemplar_libro():
     return None
 
 def nuevo_libro():
-    #completar
+    contador=0
+    for libro in libros:
+        contador+=1
+    contador+=1
+    conta_str = str(contador)
+    libros.append("libro"+conta_str)
+
+    codigo=cg.generar()
+    nombre_ejemplar=input("Ingrese el nombre del libro")
+    autor_ingresar=input("Ingrese el nombre del Autor")
+    cant_ej_adquiridos=int(input("Ingrese la cantidad de ejemplares que desea ingresar al sistema"))
+
+    libros[-1]={'cod': 'hh', 'cant_ej_ad': cant_ej_adquiridos, 'cant_ej_pr': 0, "titulo": nombre_ejemplar, "autor": autor_ingresar}
+    print(libros[-1])
     return None
