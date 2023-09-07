@@ -16,13 +16,10 @@ def ejemplares_prestados():
         if libro['cant_ej_pr'] > 0:
             print(f"Nombre: {libro['titulo']}\nPrestados: {libro['cant_ej_pr']}\n")
         else:
-            print(f"No hay ejemplares prestados del libro {libro['titulo']}")
+            print(f"No hay ejemplares prestados del libro {libro['titulo']}\n")
     return None
 
-def registrar_nuevo_libro():
-    nuevo_libro = l.nuevo_libro()
-    #completar
-    return None
+
 
 def eliminar_ejemplar_libro():
     codigo_ingresado=input("Ingrese el código del libro: ")
@@ -71,23 +68,27 @@ def prestar_ejemplar_libro():
 def devolver_ejemplar_libro():
     codigo_ingresado=input("Ingrese el código del libro")
     for libro in libros:
-        if libro['cod'] == codigo_ingresado and libro['cant_ej_pr'] > 0:
-          print(f"Hay {libro['cant_ej_pr']} prestados")
-          while True:
-                devolver=input("Desea devolver un libro? S - N \n").upper()
-                if devolver == "S":
-                  libro['cant_ej_pr'] -= 1
-                  libro['cant_ej_ad'] += 1
-                  print("Libro devuelto con exito")
-                  return None
-                elif devolver == "N":
-                  print("No se devolvio el libro")
-                  return None
+        if libro['cod'] == codigo_ingresado: 
+            if libro['cant_ej_pr'] > 0:
+                print(f"Hay {libro['cant_ej_pr']} prestados")
+                while True:
+                        devolver=input("Desea devolver un libro? S - N \n").upper()
+                        if devolver == "S":
+                            libro['cant_ej_pr'] -= 1
+                            libro['cant_ej_ad'] += 1
+                            print("Libro devuelto con exito")
+                            return None
+                        elif devolver == "N":
+                            print("No se devolvio el libro")
+                            return None
+                        else:
+                            print("Ingrese (s o S) para devolver el libro o (n o N) para no hacerlo \n")
                 else:
-                    print("Ingrese (s o S) para devolver el libro o (n o N) para no hacerlo \n")
-        else:
-            print("No hay libros prestados")
-            return None
+                    print("No hay libros prestados")
+                    return None
+
+    print("No se encontro el libro en la lista")
+
     return None
 
 def nuevo_libro():
@@ -99,10 +100,10 @@ def nuevo_libro():
     libros.append("libro"+conta_str)
 
     codigo=cg.generar()
-    nombre_ejemplar=input("Ingrese el nombre del libro")
-    autor_ingresar=input("Ingrese el nombre del Autor")
-    cant_ej_adquiridos=int(input("Ingrese la cantidad de ejemplares que desea ingresar al sistema"))
+    nombre_ejemplar=input("Ingrese el nombre del libro: ")
+    autor_ingresar=input("Ingrese el nombre del Autor: ")
+    cant_ej_adquiridos=int(input("Ingrese la cantidad de ejemplares que desea ingresar al sistema: "))
 
-    libros[-1]={'cod': 'hh', 'cant_ej_ad': cant_ej_adquiridos, 'cant_ej_pr': 0, "titulo": nombre_ejemplar, "autor": autor_ingresar}
-    print(libros[-1])
+    libros[-1]={'cod': codigo, 'cant_ej_ad': cant_ej_adquiridos, 'cant_ej_pr': 0, "titulo": nombre_ejemplar, "autor": autor_ingresar}
+    print(f"Resumen: {libros[-1]}")
     return None
