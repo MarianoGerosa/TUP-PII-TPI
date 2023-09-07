@@ -32,7 +32,7 @@ while respuesta != "salir":
             #completar
             print()
         elif int(opt) == 4:
-            #completar
+            biblio.eliminar_ejemplar_libro()
             print()
         elif int(opt) == 5:
             biblio.ejemplares_prestados()

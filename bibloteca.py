@@ -24,11 +24,25 @@ def registrar_nuevo_libro():
     return None
 
 def eliminar_ejemplar_libro():
-    #completar
+    codigo_ingresado=input("Ingrese el código del libro: ")
+    for libro in libros:
+        if libro['cod'] == codigo_ingresado and libro['cant_ej_ad'] > 0:
+            print(f"Autor:{libro['autor']}\nNombre:{libro['titulo']}\nDisponibles:{libro['cant_ej_ad']}")
+            eli=int(input("Ingrese cuantos ejemplares quiere eliminar: "))
+            if eli > libro['cant_ej_ad']:
+                print("No se puede eliminar mas ejemplares de los que hay, intente nuevamente")
+                return None
+            else:
+                libro['cant_ej_ad'] -= eli
+                print("Se elimino el ejemplar del libro correctamente")
+                return None
+        else:
+            print("Libro no encontrado o no hay ejemplares disponibles")
+            return None
     return None
 
 def prestar_ejemplar_libro():
-    codigo_ingresado=input("Ingrese el código del libro")
+    codigo_ingresado=input("Ingrese el código del libro: ")
     for libro in libros:
         if libro['cod'] == codigo_ingresado:
             print(f"Autor:{libro['autor']}\nNombre:{libro['titulo']}\nDisponibles:{libro['cant_ej_ad']}")
