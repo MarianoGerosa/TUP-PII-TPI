@@ -68,7 +68,7 @@ def prestar_ejemplar_libro():
     return None
 
 def devolver_ejemplar_libro():
-    codigo_ingresado=input("Ingrese el código del libro")
+    codigo_ingresado=input("Ingrese el código del libro: ")
     for libro in libros:
         if libro['cod'] == codigo_ingresado: 
             if libro['cant_ej_pr'] > 0:
@@ -78,7 +78,7 @@ def devolver_ejemplar_libro():
                         if devolver == "S":
                             libro['cant_ej_pr'] -= 1
                             libro['cant_ej_ad'] += 1
-                            print("Libro devuelto con exito")
+                            print("Libro devuelto con exito: ")
                             return None
                         elif devolver == "N":
                             print("No se devolvio el libro")
